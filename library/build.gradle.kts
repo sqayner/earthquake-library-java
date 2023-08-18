@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "tr.com.erenkaynar.library"
+    namespace = "tr.com.erenkaynar.library.earthquake"
     compileSdk = 33
 
     defaultConfig {

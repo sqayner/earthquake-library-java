@@ -1,4 +1,4 @@
-package tr.com.erenkaynar.library;
+package tr.com.erenkaynar.library.earthquake;
 
 import android.content.Context;
 
