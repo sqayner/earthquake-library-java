@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Earthquake"
-include(":app")
-include(":library")
+include ':app'
+include ':library'
