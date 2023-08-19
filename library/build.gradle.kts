@@ -3,6 +3,9 @@ plugins {
     id("maven-publish")
 }
 
+group = "com.github.sqayner"
+version = "1.0.0"
+
 android {
     namespace = "tr.com.erenkaynar.library.earthquake"
     compileSdk = 33
