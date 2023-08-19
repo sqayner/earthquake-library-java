@@ -49,15 +49,14 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
 
-publishing {
-    publications {
-        release(MavenPublication) {
-            groupId = 'com.github.sqayner'
-            artifactId = 'earthquake-library-java'
-            version = '1.0.0'
-
-            afterEvaluate {
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
                 from components.release
+                groupId = 'com.github.sqayner'
+                artifactId = 'earthquake-library-java'
+                version = '1.0.0'
             }
         }
     }
