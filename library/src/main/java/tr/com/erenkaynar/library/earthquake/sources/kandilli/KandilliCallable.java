@@ -46,7 +46,6 @@ public class KandilliCallable extends EarthquakeAPICallable {
 
             earthquake.setRevised(getRevised(earthquakeString));
             earthquake.setDatetime(getDateTime(earthquakeString));
-            earthquake.setDatetime(getDateTime(earthquakeString));
             earthquake.setDepth(Double.parseDouble(earthquakeString.substring(41, 49).trim()));
             earthquake.setMagnitude(getMagnitude(earthquakeString));
             earthquake.setLocation(earthquakeString.substring(71, 121).trim());

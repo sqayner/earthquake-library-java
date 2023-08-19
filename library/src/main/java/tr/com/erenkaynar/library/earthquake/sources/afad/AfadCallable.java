@@ -10,7 +10,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import tr.com.erenkaynar.library.earthquake.Constants;
@@ -58,7 +60,10 @@ public class AfadCallable extends EarthquakeAPICallable {
                 latLong.setLatitude(Double.parseDouble(datas.get(1).html()));
                 latLong.setLongitude(Double.parseDouble(datas.get(2).html()));
                 earthquake.setCoordinates(latLong);
-                earthquake.setDatetime(Instant.parse(datas.get(0).html().replace(" ", "T") + ".000Z").minusSeconds(60 * 60 * 3));
+
+                DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime ldt = LocalDateTime.parse(datas.get(0).html(), f);
+                earthquake.setDatetime(ldt.toInstant(ZoneOffset.ofHours(3)));
 
                 earthquakes.add(earthquake);
             }
