@@ -1,6 +1,6 @@
 plugins {
     id("com.android.library")
-    `maven-publish`
+    id("maven-publish")
 }
 
 android {
