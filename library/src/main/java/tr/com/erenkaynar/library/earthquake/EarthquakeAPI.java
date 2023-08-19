@@ -24,8 +24,9 @@ public class EarthquakeAPI implements Callback<ArrayList<Earthquake>> {
         return new EarthquakeAPI();
     }
 
-    public void setEarthquakeAPIListener(EarthquakeAPIListener earthquakeAPIListener) {
+    public EarthquakeAPI setEarthquakeAPIListener(EarthquakeAPIListener earthquakeAPIListener) {
         this.earthquakeAPIListener = earthquakeAPIListener;
+        return this;
     }
 
     public EarthquakeAPI setSource(Source source) {

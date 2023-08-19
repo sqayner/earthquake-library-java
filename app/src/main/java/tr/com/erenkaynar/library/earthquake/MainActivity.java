@@ -13,7 +13,6 @@ import tr.com.erenkaynar.library.earthquake.models.Earthquake;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EarthquakeAPI earthquakeAPI;
     private TextView text;
 
     @Override
@@ -23,9 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         text = findViewById(R.id.textView);
 
-        earthquakeAPI = new EarthquakeAPI();
-        earthquakeAPI.setSource(Source.AFAD);
-        earthquakeAPI.setEarthquakeAPIListener(new EarthquakeAPIListener() {
+        EarthquakeAPI.initialize().setSource(Source.KANDILLI).setEarthquakeAPIListener(new EarthquakeAPIListener() {
             @Override
             public void onLoaded(ArrayList<Earthquake> earthquakes) {
                 StringBuilder output = new StringBuilder();
@@ -57,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
             public void onError(Exception e) {
 
             }
-        });
-        earthquakeAPI.load();
+        }).load();
     }
 }
