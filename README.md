@@ -1,4 +1,5 @@
 # earthquake-library-java
+[![](https://jitpack.io/v/sqayner/earthquake-library-java.svg)](https://jitpack.io/#sqayner/earthquake-library-java)
 
 ## Örnek Kod
 ```java
