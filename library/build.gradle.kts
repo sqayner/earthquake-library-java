@@ -47,7 +47,7 @@ dependencies {
 
 publishing {
     publications {
-        create<MavenPublication>("maven") {
+        register<MavenPublication>("release") {
             groupId = "com.github.sqayner"
             artifactId = "earthquake-library-java"
             version = "1.0.0"
