@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         text = findViewById(R.id.textView);
 
-        EarthquakeAPI.initialize().setSource(Source.KANDILLI).setEarthquakeAPIListener(new EarthquakeAPIListener() {
+        EarthquakeAPI.initialize().setSource(Source.USGS).setEarthquakeAPIListener(new EarthquakeAPIListener() {
             @Override
             public void onLoaded(ArrayList<Earthquake> earthquakes) {
                 StringBuilder output = new StringBuilder();

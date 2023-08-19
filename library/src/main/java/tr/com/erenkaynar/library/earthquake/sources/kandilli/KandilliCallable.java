@@ -1,7 +1,5 @@
 package tr.com.erenkaynar.library.earthquake.sources.kandilli;
 
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;

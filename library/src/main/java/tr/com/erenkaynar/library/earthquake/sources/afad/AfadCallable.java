@@ -58,7 +58,7 @@ public class AfadCallable extends EarthquakeAPICallable {
                 latLong.setLatitude(Double.parseDouble(datas.get(1).html()));
                 latLong.setLongitude(Double.parseDouble(datas.get(2).html()));
                 earthquake.setCoordinates(latLong);
-                earthquake.setDatetime(Instant.parse(datas.get(0).html().replace(" ", "T") + ".000Z").plusSeconds(-60 * 60 * 3));
+                earthquake.setDatetime(Instant.parse(datas.get(0).html().replace(" ", "T") + ".000Z").minusSeconds(60 * 60 * 3));
 
                 earthquakes.add(earthquake);
             }
