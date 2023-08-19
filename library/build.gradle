@@ -3,14 +3,17 @@ plugins {
     id 'maven-publish'
 }
 
+group = 'com.github.sqayner'
+version = '1.0.0'
+
 android {
     namespace 'tr.com.erenkaynar.library.earthquake'
     compileSdk 33
 
     defaultConfig {
         minSdk 26
-        versionCode 3
-        versionName "2.0.1"
+        versionCode 1
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
