@@ -1,8 +1,8 @@
 package tr.com.erenkaynar.library.earthquake;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         text = findViewById(R.id.textView);
 
-        EarthquakeAPI.initialize().setSource(Source.AFAD).setEarthquakeAPIListener(new EarthquakeAPIListener() {
+        EarthquakeAPI.initialize().setSource(Source.KANDILLI).setEarthquakeAPIListener(new EarthquakeAPIListener() {
             @Override
             public void onLoaded(ArrayList<Earthquake> earthquakes) {
                 StringBuilder output = new StringBuilder();
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(Exception e) {
-
+                Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }).load();
     }

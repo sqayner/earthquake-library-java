@@ -86,6 +86,7 @@ public class Earthquake implements Serializable {
             return "kandilli-" + MD5.encode((magnitude == null ? "" : magnitude) + "," + (coordinates == null ? "" : +coordinates.getLatitude()) + "," + (coordinates == null ? "" : +coordinates.getLongitude()) + "," + (depth == null ? "" : +depth) + "," + (datetime == null ? "" : +datetime.getEpochSecond()) + "," + (location == null ? "" : location));
         if (source == Source.AFAD) return "afad-" + MD5.encode(id);
         if (source == Source.USGS) return "usgs-" + MD5.encode(id);
+        if (source == Source.EMSC) return "emsc-" + MD5.encode(id);
 
         return null;
     }

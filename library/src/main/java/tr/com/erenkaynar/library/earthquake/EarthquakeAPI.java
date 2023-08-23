@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 import tr.com.erenkaynar.library.earthquake.enums.Source;
 import tr.com.erenkaynar.library.earthquake.models.Earthquake;
-import tr.com.erenkaynar.library.earthquake.sources.afad.AfadCallable;
-import tr.com.erenkaynar.library.earthquake.sources.kandilli.KandilliCallable;
-import tr.com.erenkaynar.library.earthquake.sources.usgs.UsgsCallable;
+import tr.com.erenkaynar.library.earthquake.sources.EarthquakeAPICallable;
 import tr.com.erenkaynar.library.earthquake.utils.Callback;
 import tr.com.erenkaynar.library.earthquake.utils.TaskRunner;
 
@@ -35,31 +33,17 @@ public class EarthquakeAPI implements Callback<ArrayList<Earthquake>> {
     }
 
     public void load() {
-        switch (source) {
-            case KANDILLI:
-                taskRunner.executeAsync(new KandilliCallable(), this);
-                break;
-            case AFAD:
-                taskRunner.executeAsync(new AfadCallable(), this);
-                break;
-            case USGS:
-                taskRunner.executeAsync(new UsgsCallable(), this);
-                break;
-            default:
-                break;
-        }
+        taskRunner.executeAsync(new EarthquakeAPICallable(source), this);
     }
 
     @Override
     public void onLoaded(ArrayList<Earthquake> data) {
-        if (earthquakeAPIListener != null)
-            earthquakeAPIListener.onLoaded(data);
+        if (earthquakeAPIListener != null) earthquakeAPIListener.onLoaded(data);
     }
 
     @Override
     public void onError(Exception e) {
-        if (earthquakeAPIListener != null)
-            earthquakeAPIListener.onError(e);
+        if (earthquakeAPIListener != null) earthquakeAPIListener.onError(e);
     }
 
     @Override

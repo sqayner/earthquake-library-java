@@ -1,46 +1,30 @@
-package tr.com.erenkaynar.library.earthquake.sources.kandilli;
+package tr.com.erenkaynar.library.earthquake.sources.parsers;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.Charset;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.TimeZone;
 
-import tr.com.erenkaynar.library.earthquake.Constants;
 import tr.com.erenkaynar.library.earthquake.enums.Source;
 import tr.com.erenkaynar.library.earthquake.models.Earthquake;
 import tr.com.erenkaynar.library.earthquake.models.LatLong;
 import tr.com.erenkaynar.library.earthquake.models.Revised;
-import tr.com.erenkaynar.library.earthquake.sources.EarthquakeAPICallable;
 
-public class KandilliCallable extends EarthquakeAPICallable {
+public class KandilliParser extends Parser {
     @Override
-    public URL getUrl() throws Exception {
-        return new URL(Constants.KANDILLI_URL);
-    }
-
-    @Override
-    protected ArrayList<Earthquake> call() throws Exception {
-        URLConnection connection = getUrl().openConnection();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charset.forName("windows-1254")));
-        ArrayList<String> lines = new ArrayList<>();
-        String line;
-        while ((line = reader.readLine()) != null)
-            lines.add(line);
-        reader.close();
-
-        return parse(lines);
-    }
-
-    private ArrayList<Earthquake> parse(ArrayList<String> lines) {
+    public ArrayList<Earthquake> parse(String data) {
         ArrayList<Earthquake> earthquakes = new ArrayList<>();
-        for (int i = arrayFirstIndexOf(lines, "<pre>") + 7; i < arrayFirstIndexOf(lines, "</pre>") - 1; i++) {
-            String earthquakeString = lines.get(i);
+
+        Document document = Jsoup.parse(data);
+        Elements pre = document.getElementsByTag("pre");
+        String[] lines = pre.html().split("\n");
+
+        for (int i = 6; i < lines.length; i++) {
+            String earthquakeString = lines[i];
 
             Earthquake earthquake = new Earthquake(Source.KANDILLI);
 
@@ -75,9 +59,9 @@ public class KandilliCallable extends EarthquakeAPICallable {
         return new Revised(Integer.parseInt(revised.substring(7, 8)), date.toInstant());
     }
 
-    private int arrayFirstIndexOf(List<String> array, String index) {
-        for (int i = 0; i < array.size(); i++) {
-            if (array.get(i).contains(index))
+    private int arrayFirstIndexOf(String[] array, String index) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].contains(index))
                 return i;
         }
         return -1;

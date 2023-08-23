@@ -1,35 +1,22 @@
-package tr.com.erenkaynar.library.earthquake.sources.usgs;
+package tr.com.erenkaynar.library.earthquake.sources.parsers;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-import tr.com.erenkaynar.library.earthquake.Constants;
 import tr.com.erenkaynar.library.earthquake.enums.Source;
 import tr.com.erenkaynar.library.earthquake.models.Earthquake;
 import tr.com.erenkaynar.library.earthquake.models.LatLong;
-import tr.com.erenkaynar.library.earthquake.sources.EarthquakeAPICallable;
 
-public class UsgsCallable extends EarthquakeAPICallable {
-
+public class TextParser extends Parser {
     @Override
-    protected ArrayList<Earthquake> call() throws Exception {
-        URLConnection connection = getUrl().openConnection();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        ArrayList<String> lines = new ArrayList<>();
-        String line;
-        while ((line = reader.readLine()) != null) lines.add(line);
-        reader.close();
-        lines.remove(0);
-
-        return parse(lines);
-    }
-
-    private ArrayList<Earthquake> parse(ArrayList<String> lines) {
+    public ArrayList<Earthquake> parse(String data) {
         ArrayList<Earthquake> earthquakes = new ArrayList<>();
+
+        final String[] linesArr = data.split("\n");
+        final ArrayList<String> lines = new ArrayList<>(Arrays.asList(linesArr));
+        lines.remove(lines.size() - 1);
+        lines.remove(0);
 
         for (String line : lines) {
             Earthquake earthquake = parseLine(line);
@@ -55,14 +42,9 @@ public class UsgsCallable extends EarthquakeAPICallable {
         earthquake.setMagnitude(Double.parseDouble(values[10]));
         earthquake.setLocation(values[12]);
 
-        earthquake.setDatetime(Instant.parse(values[1] + "Z"));
+        earthquake.setDatetime(Instant.parse(values[1] + (values[1].contains("Z") ? "" : "Z")));
 
         earthquake.setRevised(null);
         return earthquake;
-    }
-
-    @Override
-    public URL getUrl() throws Exception {
-        return new URL(Constants.USGS_URL);
     }
 }

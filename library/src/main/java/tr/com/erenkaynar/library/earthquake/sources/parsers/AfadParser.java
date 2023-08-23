@@ -1,45 +1,22 @@
-package tr.com.erenkaynar.library.earthquake.sources.afad;
+package tr.com.erenkaynar.library.earthquake.sources.parsers;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import tr.com.erenkaynar.library.earthquake.Constants;
 import tr.com.erenkaynar.library.earthquake.enums.Source;
 import tr.com.erenkaynar.library.earthquake.models.Earthquake;
 import tr.com.erenkaynar.library.earthquake.models.LatLong;
-import tr.com.erenkaynar.library.earthquake.sources.EarthquakeAPICallable;
 
-public class AfadCallable extends EarthquakeAPICallable {
+public class AfadParser extends Parser {
     @Override
-    public URL getUrl() throws Exception {
-        return new URL(Constants.AFAD_URL);
-    }
-
-    @Override
-    protected ArrayList<Earthquake> call() throws Exception {
-        URLConnection connection = getUrl().openConnection();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
-        String line;
-        StringBuilder data = new StringBuilder();
-        while ((line = reader.readLine()) != null) data.append(line);
-        reader.close();
-
-        return parse(data.toString());
-    }
-
-    private ArrayList<Earthquake> parse(String data) {
+    public ArrayList<Earthquake> parse(String data) {
         ArrayList<Earthquake> earthquakes = new ArrayList<>();
 
         Document html = Jsoup.parse(data);
