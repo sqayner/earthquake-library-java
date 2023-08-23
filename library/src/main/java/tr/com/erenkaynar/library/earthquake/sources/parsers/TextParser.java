@@ -9,6 +9,13 @@ import tr.com.erenkaynar.library.earthquake.models.Earthquake;
 import tr.com.erenkaynar.library.earthquake.models.LatLong;
 
 public class TextParser extends Parser {
+
+    private Source source;
+
+    public TextParser(Source source) {
+        this.source = source;
+    }
+
     @Override
     public ArrayList<Earthquake> parse(String data) {
         ArrayList<Earthquake> earthquakes = new ArrayList<>();
@@ -27,7 +34,7 @@ public class TextParser extends Parser {
     }
 
     private Earthquake parseLine(String line) {
-        final Earthquake earthquake = new Earthquake(Source.USGS);
+        final Earthquake earthquake = new Earthquake(source);
 
         String[] values = line.split("\\|");
 

@@ -39,7 +39,7 @@ public class EarthquakeAPICallable extends Callable<ArrayList<Earthquake>> {
             case USGS:
             case EMSC:
                 charset = Charset.defaultCharset();
-                parser = new TextParser();
+                parser = new TextParser(source);
                 break;
             case AFAD:
                 charset = StandardCharsets.UTF_8;
