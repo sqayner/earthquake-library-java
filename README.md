@@ -19,7 +19,7 @@ EarthquakeAPI.initialize().setSource(Source.KANDILLI).setEarthquakeAPIListener(n
 ## Kullanılan Uygulamalar
 
 <p align="center">
-<img width="100%" src="https://raw.githubusercontent.com/sqayner/earthquake-library-java/main/images/son-depremler-thumbnail.png" style="border-radius:100px">
+<img width="100%" src="https://raw.githubusercontent.com/sqayner/earthquake-library-java/main/images/son-depremler-thumbnail.png" style="border-radius:20%">
 </p>
 
 <p align="center">
