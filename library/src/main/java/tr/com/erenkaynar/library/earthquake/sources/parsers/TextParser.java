@@ -22,7 +22,6 @@ public class TextParser extends Parser {
 
         final String[] linesArr = data.split("\n");
         final ArrayList<String> lines = new ArrayList<>(Arrays.asList(linesArr));
-        lines.remove(lines.size() - 1);
         lines.remove(0);
 
         for (String line : lines) {
