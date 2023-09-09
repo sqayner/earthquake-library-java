@@ -46,7 +46,7 @@ public class TextParser extends Parser {
         earthquake.setCoordinates(latLong);
 
         earthquake.setMagnitude(Double.parseDouble(values[10]));
-        earthquake.setLocation(values[12]);
+        earthquake.setLocation(values.length == 13 ? values[12] : "Belirtilmemiş");
 
         earthquake.setDatetime(Instant.parse(values[1] + (values[1].contains("Z") ? "" : "Z")));
 
