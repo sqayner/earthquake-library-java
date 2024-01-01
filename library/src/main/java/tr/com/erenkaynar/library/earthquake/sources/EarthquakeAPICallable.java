@@ -1,5 +1,7 @@
 package tr.com.erenkaynar.library.earthquake.sources;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -44,7 +46,6 @@ public class EarthquakeAPICallable extends Callable<ArrayList<Earthquake>> {
             case AFAD:
                 charset = StandardCharsets.UTF_8;
                 parser = new AfadParser();
-                a = ' ';
                 break;
             default:
                 return null;
